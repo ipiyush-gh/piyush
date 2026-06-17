@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form Validation</title>
+
+    <style>
+        body{
+            text-align: center;
+            margin-top: 100px;
+            font-family: Arial, sans-serif;
+        }
+
+        form{
+            display: inline-block;
+            text-align: left;
+            border: 1px solid black;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Tasks</h2>
+
+<form onsubmit="return validateForm()">
+
+    Email:<br>
+    <input type="text" id="email"><br><br>
+
+    Password:<br>
+    <input type="password" id="password"><br><br>
+
+    Mobile Number:<br>
+    <input type="text" id="mobile"><br><br>
+
+    Gender:<br>
+    <input type="radio" name="gender" value="Male"> Male
+    <input type="radio" name="gender" value="Female"> Female
+    <br><br>
+
+    City:<br>
+    <select id="city">
+        <option value="">Select City</option>
+        <option>Pune</option>
+        <option>Mumbai</option>
+        <option>Nashik</option>
+        <option>Nagpur</option>
+    </select>
+    <br><br>
+
+    <input type="submit" value="Submit">
+
+</form>
+
+<script>
+
+function validateForm()
+{
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    let mobile = document.getElementById("mobile").value;
+    let city = document.getElementById("city").value;
+
+    let gender = document.querySelector('input[name="gender"]:checked');
+
+    let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    let mobileRegex = /^[6-9][0-9]{9}$/;
+    let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+    if(!emailRegex.test(email))
+    {
+        alert("Email format is not correct");
+        return false;
+    }
+
+    if(!passwordRegex.test(password))
+    {
+        alert("Password must contain at least 8 characters, 1 uppercase, 1 lowercase and 1 number");
+        return false;
+    }
+
+    if(!mobileRegex.test(mobile))
+    {
+        alert("Mobile number must be 10 digits and start with 6-9");
+        return false;
+    }
+
+    if(gender == null)
+    {
+        alert("Please select gender");
+        return false;
+    }
+
+    if(city == "")
+    {
+        alert("Please select city");
+        return false;
+    }
+
+    alert("Form Submitted Successfully");
+    return true;
+}
+
+</script>
+
+</body>
+</html>
